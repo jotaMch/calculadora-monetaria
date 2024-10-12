@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-// Definir a interface para o contexto de moeda
+
 interface CurrencyContextValue {
     rates: Record<string, number> | null;
     fromCurrency: string;

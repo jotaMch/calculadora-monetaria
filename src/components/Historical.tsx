@@ -45,7 +45,7 @@ export const Historical: React.FC = () => {
                             </Tr>
                                 <Tr>
                                     <Td fontWeight="bold">Valor Convertido</Td>
-                                    <Td fontWeight="bold">{convertedValue}</Td>
+                                    <Td fontWeight="bold">{convertedValue?.toFixed(2)}</Td>
                                 </Tr>
                         </Tbody>
                     </Table>
