@@ -12,7 +12,7 @@ export const Historical: React.FC = () => {
     return (
         <Flex flexDirection='column' align='start' m='20px'>
             <Text fontWeight='bold' >Histórico de conversões</Text>
-            <Button colorScheme="teal" my={5} onClick={handleClick}>Vizualizar</Button>
+            <Button colorScheme="teal" my={5} onClick={handleClick}> {isOpen ? 'Fechar vizualização' : 'Vizualizar'}</Button>
             {isOpen && (
                 <Box
                 borderWidth="1px"
