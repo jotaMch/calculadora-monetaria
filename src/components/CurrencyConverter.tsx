@@ -16,29 +16,34 @@ const CurrencyConverter: React.FC = () => {
         setConvertedValue,
     } = useCurrency();
     
+
     const fetchRates = async () => {
         try {
+            console.log("Verificando taxas salvas...");
             const savedRates = localStorage.getItem("exchangeRates");
             const savedTimestamp = localStorage.getItem("timestamp");
             const now = new Date().getTime();
     
             if (savedRates && savedTimestamp) {
+                console.log("Taxas salvas encontradas. Usando taxas do localStorage.");
                 setRates(JSON.parse(savedRates));
             } else {
+                console.log("Chamando a API para buscar as taxas...");
                 const response = await fetch("http://data.fixer.io/api/latest?access_key=d9c5ff35a435f8b7d020965ce1f10412");
-                console.log(response); // Adicione esta linha
-                if (!response.ok) throw new Error("Erro ao buscar os dados da API");
-    
+                
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar os dados da API");
+                }
                 const data = await response.json();
-                console.log(data); // Adicione esta linha para ver a resposta da API
+                console.log(data, 'jota')
                 if (!data.success) throw new Error(data.error.info);
     
+                console.log("Taxas recebidas da API:", data.rates);
                 localStorage.setItem("exchangeRates", JSON.stringify(data.rates));
                 localStorage.setItem("timestamp", now.toString());
                 setRates(data.rates);
             }
         } catch (error) {
-            console.error("Erro:", error); // Adicione logs de erro
             if (error instanceof Error) {
                 alert(`Ocorreu um erro: ${error.message}`);
             } else {
