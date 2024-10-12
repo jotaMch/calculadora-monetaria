@@ -34,7 +34,7 @@ export const Historical: React.FC = () => {
     };
 
     return (
-        <Flex flexDirection="column" align="start" m="20px" w={{base: '100%', md: '100%', lg: '50%'}}>
+        <Flex flexDirection="column" align="start" m="20px" w={{base: '90%', md: '100%', lg: '50%'}}>
             <Text fontWeight="bold">Histórico de conversões</Text>
             <Flex gap={4}>
                 <Button colorScheme="teal" variant='solid' my={5} onClick={handleToggleView}>

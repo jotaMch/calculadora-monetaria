@@ -87,7 +87,7 @@ const CurrencyConverter: React.FC = () => {
     };
 
     return (
-        <Box w='48%' m='20px'>
+        <Box w={{base: '90%', md: '90%', lg: '48%'}} m='20px'>
             {rates ? (
                 <FormControl>
                     <FormLabel>Valor a ser convertido</FormLabel>
@@ -97,6 +97,7 @@ const CurrencyConverter: React.FC = () => {
                         value={amount}
                         onChange={(e) => setAmount(Number(e.target.value) || "")}
                     />
+
                     <FormLabel>Selecione a moeda que será convertida</FormLabel>
                     <Select value={fromCurrency} onChange={(e) => setFromCurrency(e.target.value)}>
                         {Object.entries(rates).map(([currency, rate], index) => (
@@ -105,6 +106,7 @@ const CurrencyConverter: React.FC = () => {
                             </option>
                         ))}
                     </Select>
+
                     <FormLabel>Selecione a moeda de conversão</FormLabel>
                     <Select value={toCurrency} onChange={(e) => setToCurrency(e.target.value)}>
                         {Object.entries(rates).map(([currency, rate], index) => (
@@ -113,6 +115,7 @@ const CurrencyConverter: React.FC = () => {
                             </option>
                         ))}
                     </Select>
+                    
                     <Button colorScheme="teal" onClick={handleConvert} mt={4}>
                         Converter
                     </Button>
