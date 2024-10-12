@@ -29,7 +29,7 @@ const CurrencyConverter: React.FC = () => {
                 setRates(JSON.parse(savedRates));
             } else {
                 console.log("Chamando a API para buscar as taxas...");
-                const response = await fetch("http://data.fixer.io/api/latest?access_key=d9c5ff35a435f8b7d020965ce1f10412");
+                const response = await fetch("https://data.fixer.io/api/latest?access_key=d9c5ff35a435f8b7d020965ce1f10412");
                 
                 if (!response.ok) {
                     throw new Error("Erro ao buscar os dados da API");
