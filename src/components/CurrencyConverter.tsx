@@ -87,7 +87,7 @@ const CurrencyConverter: React.FC = () => {
     };
 
     return (
-        <Box w='70%' m='20px'>
+        <Box w='48%' m='20px'>
             {rates ? (
                 <FormControl>
                     <FormLabel>Valor a ser convertido</FormLabel>
