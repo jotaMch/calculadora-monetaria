@@ -43,9 +43,9 @@ const CurrencyConverter: React.FC = () => {
             
         } catch (error) {
             if (error instanceof Error) {
-                alert(`Ocorreu um erro: ${error.message}`);
+                console.log(`Ocorreu um erro: ${error.message}`);
             } else {
-                alert("Ocorreu um erro desconhecido.");
+                console.log("Ocorreu um erro desconhecido.");
             }
         }
     };
