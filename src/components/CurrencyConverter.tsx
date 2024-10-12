@@ -15,21 +15,22 @@ const CurrencyConverter: React.FC = () => {
         setAmount,
         setConvertedValue,
     } = useCurrency();
+
     const fetchRates = async () => {
         try {
             const savedRates = localStorage.getItem("exchangeRates");
             const savedTimestamp = localStorage.getItem("timestamp");
             const now = new Date().getTime();
-    
+
             if (savedRates && savedTimestamp) {
                 setRates(JSON.parse(savedRates));
             } else {
                 const response = await fetch("http://data.fixer.io/api/latest?access_key=d9c5ff35a435f8b7d020965ce1f10412");
                 if (!response.ok) throw new Error("Erro ao buscar os dados da API");
-    
+
                 const data = await response.json();
                 if (!data.success) throw new Error(data.error.info);
-    
+
                 localStorage.setItem("exchangeRates", JSON.stringify(data.rates));
                 localStorage.setItem("timestamp", now.toString());
                 setRates(data.rates);
@@ -42,7 +43,7 @@ const CurrencyConverter: React.FC = () => {
             }
         }
     };
-    
+
     useEffect(() => {
         fetchRates();
     }, []);
@@ -54,7 +55,24 @@ const CurrencyConverter: React.FC = () => {
 
             if (fromRate && toRate) {
                 const conversionRate = toRate / fromRate;
-                setConvertedValue(Number(amount) * conversionRate);
+                const convertedAmount = Number(amount) * conversionRate;
+                setConvertedValue(convertedAmount);
+
+                // Salvar a conversão no localStorage
+                const newConversion = {
+                    fromCurrency,
+                    toCurrency,
+                    amount,
+                    convertedValue: convertedAmount,
+                    date: new Date().toLocaleString(), 
+                };
+
+                const storedHistory = localStorage.getItem('conversionHistory');
+                const conversionHistory = storedHistory ? JSON.parse(storedHistory) : [];
+
+                const updatedHistory = [newConversion, ...conversionHistory];
+                localStorage.setItem('conversionHistory', JSON.stringify(updatedHistory));
+                
             }
         } else {
             alert("Selecione ambas as moedas e insira um valor para realizar a conversão.");
