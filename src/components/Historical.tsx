@@ -11,39 +11,53 @@ export const Historical: React.FC = () => {
             setConversionHistory(JSON.parse(storedHistory));
         }
         
-        // Recupera o estado de 'isOpen' do localStorage
+        // Recuperar o estado de 'isOpen' do localStorage
         const storedIsOpen = localStorage.getItem('isOpen');
         if (storedIsOpen) {
             setIsOpen(storedIsOpen === 'true');
         }
     }, []);
 
-    const handleClick = () => {
+    // Função para abrir/fechar a visualização
+    const handleToggleView = () => {
         const newIsOpen = !isOpen;
-        setIsOpen(newIsOpen);        
-        // Armazena o novo estado de 'isOpen' no localStorage
+        setIsOpen(newIsOpen);
         localStorage.setItem('isOpen', newIsOpen.toString());
+    };
 
-        window.location.reload();
+    // Função para atualizar os dados do histórico
+    const handleUpdateHistory = () => {
+        const storedHistory = localStorage.getItem('conversionHistory');
+        if (storedHistory) {
+            setConversionHistory(JSON.parse(storedHistory));
+        }
     };
 
     return (
         <Flex flexDirection="column" align="start" m="20px">
             <Text fontWeight="bold">Histórico de conversões</Text>
-            <Button colorScheme="teal" my={5} onClick={handleClick}>
+            
+            <Button colorScheme="teal" variant='solid' my={5} onClick={handleToggleView}>
                 {isOpen ? "Fechar visualização" : "Visualizar"}
             </Button>
+
+            <Button colorScheme="teal" variant='outline' my={5} onClick={handleUpdateHistory}>
+                Atualizar histórico
+            </Button>
+
             {isOpen && (
                 <Box
-                    borderWidth="1px"
-                    borderRadius="lg"
-                    padding="4"
-                    boxShadow="md"
-                    bg="white"
-                    maxW="100%"
-                    mt="4"
+                borderWidth="1px"
+                borderRadius="lg"
+                padding="4"
+                boxShadow="md"
+                bg="white"
+                maxW="100%"
+                mt="4"
+                overflowX="auto" // Permite rolagem horizontal em telas menores
                 >
-                    <Table variant="simple">
+                    <Table variant="simple" minWidth="600px">
+                    
                         <Thead>
                             <Tr>
                                 <Th>De</Th>
