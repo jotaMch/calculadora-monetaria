@@ -49,7 +49,6 @@ const CurrencyConverter: React.FC = () => {
             }
         }
     };
-    
 
     useEffect(() => {
         fetchRates();
